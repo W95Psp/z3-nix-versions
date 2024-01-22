@@ -32,7 +32,7 @@ jobs:
             
             git push --set-upstream origin "$BRANCH"
             
-            gh pr create -B master -H "$BRANCH" --title "Add Z3$DESCRIPTION" --body 'Created by Github action'
+            gh pr create -B main -H "$BRANCH" --title "Add Z3$DESCRIPTION" --body 'Created by Github action'
           fi
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
