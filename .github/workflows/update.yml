@@ -3,6 +3,7 @@ name: Try to add new Z3 versions
 on:
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   update:
