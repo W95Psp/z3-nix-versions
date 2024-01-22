@@ -6,3 +6,6 @@ github:W95Psp/z3-nix-versions`.
 This repo also defines a github action to test the build of those Z3
 versions, and another to automatically add (daily) new Z3 versions, if
 any.
+
+## Cachix
+Prebuilt Z3 are cached using Cachix https://app.cachix.org/cache/z3-nix-versions#pull
