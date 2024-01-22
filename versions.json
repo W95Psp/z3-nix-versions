@@ -1,5 +1,17 @@
 [
   {
+    "version": "4.12.5",
+    "sha256": "sha256-Qj9w5s02OSMQ2qA7HG7xNqQGaUacA1d4zbOHynq5k+A="
+  },
+  {
+    "version": "4.12.4",
+    "sha256": "sha256-cxl7D47dRn+uMVOHbF0avj5+ZFWjaJ7lXj/8l6r9q2I="
+  },
+  {
+    "version": "4.12.3",
+    "sha256": "sha256-/YsOis73huy5XyE2xi1NksV+C+fWUmheW5JwpghJuCU="
+  },
+  {
     "version": "4.12.2",
     "sha256": "sha256-DTgpKEG/LtCGZDnicYvbxG//JMLv25VHn/NaF307JYA="
   },
