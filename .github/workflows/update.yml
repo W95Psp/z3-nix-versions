@@ -1,0 +1,38 @@
+name: Try to add new Z3 versions
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  update:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: create pull request
+        run: |
+          nix profile install nixpkgs#nix-prefetch-git
+          BRANCH=$(date +'update-%Y-%m-%d-%s')
+          rm -rf new_versions
+          bash update.sh
+          if [ -f new_versions ]; then
+            echo "new_versions:"
+            cat new_versions
+            DESCRIPTION=$(cat new_versions | xargs -IV echo ' `V`' | paste -sd',')
+            
+            git config --global user.email "you@example.com"
+            git config --global user.name "Bot"
+            
+            git checkout -b "$BRANCH"
+            git add versions.json
+            git commit -m "add z3:$DESCRIPTION"
+            
+            git push --set-upstream origin "$BRANCH"
+            
+            gh pr create -B master -H "$BRANCH" --title "Add Z3$DESCRIPTION" --body 'Created by Github action'
+          fi
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          

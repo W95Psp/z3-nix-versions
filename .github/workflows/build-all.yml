@@ -1,0 +1,36 @@
+name: Build every Z3 version
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+     - name: Checkout to repository
+       uses: actions/checkout@v3
+     - name: Set matrix data
+       id: set-matrix
+       run: |
+         echo "matrix=$(jq -c '{include: [.[] | select(.broken? | not) | {version: .version}]}' < ./versions.json)" >> $GITHUB_OUTPUT
+
+  build-z3:
+    runs-on: "ubuntu-latest"
+    needs: configure
+    strategy:
+      matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - run: |
+          VERSION=${{ matrix.version }}
+          echo "VERSION=$VERSION"
+          VERSION="${VERSION//./_}"
+          echo "VERSION=$VERSION"
+          nix build .#"z3_$VERSION"
+
