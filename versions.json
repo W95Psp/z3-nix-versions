@@ -1,5 +1,9 @@
 [
   {
+    "version": "4.12.6",
+    "sha256": "sha256-X4wfPWVSswENV0zXJp/5u9SQwGJWocLKJ/CNv57Bt+E="
+  },
+  {
     "version": "4.12.5",
     "sha256": "sha256-Qj9w5s02OSMQ2qA7HG7xNqQGaUacA1d4zbOHynq5k+A="
   },
